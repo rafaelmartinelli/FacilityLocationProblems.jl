@@ -24,22 +24,13 @@ struct CFLPData
     facilities::Vector{CFLPFacility}
     customers::Vector{CFLPCustomer}
 
-    lb::Int64
-    ub::Int64
+    lb::Float64
+    ub::Float64
 end
 
 function Base.show(io::IO, data::CFLPData)
     print(io, "CFLP Data $(data.name)")
     print(io, " ($(length(data.facilities)) facilities,")
     print(io, " $(length(data.customers)) customers)")
-    if data.lb != typemin(Int64)
-        print(io, " [$(data.lb),")
-    else
-        print(io, " [-Inf,")
-    end
-    if data.ub != typemax(Int64)
-        print(io, " $(data.ub)]")
-    else
-        print(io, " Inf]")
-    end
+    print(io, " [$(data.lb), $(data.ub)]")
 end

@@ -43,5 +43,5 @@ function load(values::Array{Float64}, name::String)
 
     facilities = [ CFLPFacility(i, capacities[i], fixed_costs[i], [ c.costs[i] for c in customers ]) for i in 1:n_facilities ]
 
-    return CFLPData(name, facilities, customers, typemin(Int64), typemax(Int64))
+    return CFLPData(name, facilities, customers, -Inf, Inf)
 end
