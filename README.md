@@ -12,12 +12,12 @@ The main type used by the package is `CFLPData`, defined as follows:
 
 ```julia
 struct CFLPData
-    name       ::String           # Instance name
-    facilities ::Vector{GAPAgent} # Vector of Facilities
-    customers  ::Vector{GAPJob}   # Vector of Customers
+    name       ::String               # Instance name
+    facilities ::Vector{CFLPFacility} # Vector of Facilities
+    customers  ::Vector{CFLPCustomer} # Vector of Customers
 
-    lb     ::Float64              # Lower bound (-Inf if not known)
-    ub     ::Float64              # Upper bound (+Inf if not known)
+    lb         ::Float64              # Lower bound (-Inf if not known)
+    ub         ::Float64              # Upper bound ( Inf if not known)
 end
 ```
 
@@ -70,7 +70,7 @@ Open Julia's interactive session (REPL) and type:
 ## Related links
 
 - [ORLib's CFLP page](http://people.brunel.ac.uk/~mastjjb/jeb/orlib/capinfo.html)
-- [Sobolev Institute of Mathematics' CFLP Page](http://www.math.nsc.ru/AP/benchmarks/CFLP/cflp_tabl-eng.html)
+- [Sobolev Institute of Mathematics' CFLP Page](http://www.math.nsc.ru/AP/benchmarks/CFLP/cflp_tabl-eng.html) (this package does not read those instances)
 
 ## Other packages
 
