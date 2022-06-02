@@ -40,3 +40,30 @@ end
     data = loadCFLP("notaninstance")
     @test data === nothing
 end
+
+@testset "DifferentCapacity" begin
+    data = loadCFLP(:cap41, 1000)
+    @test data.name == "cap41-1000"
+    @test data.facilities[3].capacity == 1000
+    @test data.facilities[5].capacity == 1000
+    @test data.lb == -Inf
+    @test data.ub == Inf
+    @test_nowarn println(data)
+    @test_nowarn println(data.facilities[2])
+    @test_nowarn println(data.customers[6])
+end
+
+@testset "LargeInstances" begin
+    data = loadCFLP(:capa, 8000)
+    @test data.name == "capa-8000"
+    @test data.facilities[3].capacity == 8000
+    @test data.facilities[5].fixed_cost == 2164343.000
+    @test data.customers[7].demand == 14
+    @test length(data.facilities) == 100
+    @test length(data.customers) == 1000
+    @test data.lb == 19240822.449
+    @test data.ub == 19240822.449
+    @test_nowarn println(data)
+    @test_nowarn println(data.facilities[2])
+    @test_nowarn println(data.customers[6])
+end

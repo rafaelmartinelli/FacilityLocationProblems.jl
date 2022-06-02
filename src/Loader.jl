@@ -1,44 +1,48 @@
-function loadCFLP(instance::Symbol)
+function loadCFLP(instance::Symbol, capacity::Int64 = 0)
     file_name = joinpath(data_path, string(instance) * ".zip")
     if !isfile(file_name)
         println("File $(string(instance)) not found!")
         return nothing
     end
 
-    name = splitext(basename(file_name))[1]
+    name = splitext(basename(file_name))[1] * (capacity == 0 ? "" : "-$capacity")
     file = ZipFile.Reader(file_name)
-    values = parse.(Float64, split(read(file.files[1], String)))
+    values = split(read(file.files[1], String))
     close(file)
 
-    return load(values, name)
+    return load(values, name, capacity)
 end
 
-function loadCFLP(file_name::String)
+function loadCFLP(file_name::String, capacity::Int64 = 0)
     if !isfile(file_name)
         println("File $file_name not found!")
         return nothing
     end
     
-    name = splitext(basename(file_name))[1]
-    values = parse.(Float64, split(read(file_name, String)))
+    name = splitext(basename(file_name))[1] * (capacity == 0 ? "" : "-$capacity")
+    values = split(read(file_name, String))
 
-    return load(values, name)
+    return load(values, name, capacity)
 end
 
-function load(values::Array{Float64}, name::String)
-    n_facilities = convert(Int64, values[1])
-    n_customers = convert(Int64, values[2])
+function load(values::Array{SubString{String}}, name::String, capacity::Int64 = 0)
+    n_facilities = parse(Int64, values[1])
+    n_customers = parse(Int64, values[2])
 
     counter = 3
 
-    capacities = convert.(Int64, values[counter:2:counter + 2 * n_facilities - 1])
-    fixed_costs = values[counter + 1:2:counter + 2 * n_facilities - 1]
+    if capacity == 0
+        capacities = parse.(Int64, values[counter:2:counter + 2 * n_facilities - 1])
+    else
+        capacities = fill(capacity, n_facilities)
+    end
+    fixed_costs = parse.(Float64, values[counter + 1:2:counter + 2 * n_facilities - 1])
 
     counter += 2 * n_facilities
 
     customers = CFLPCustomer[]
     for j in 1:n_customers
-        push!(customers, CFLPCustomer(j, convert(Int64, values[counter]), values[counter + 1:counter + n_facilities]))
+        push!(customers, CFLPCustomer(j, parse(Int64, values[counter]), parse.(Float64, values[counter + 1:counter + n_facilities])))
         counter += n_facilities + 1
     end
 

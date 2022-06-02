@@ -51,10 +51,16 @@ data = loadCFLP(:cap41)
 
 See the [full list](https://github.com/rafaelmartinelli/CFLPLib.jl/tree/main/data).
 
+Optionally, it is possible to set the facilities' capacity (mandatory for instances `capa`, `capb`, and `capc`):
+
+```julia
+data = loadCFLP(:capa, 8000)
+```
+
 CFLPLib also loads custom CFLP instances (following [ORLib format](http://people.brunel.ac.uk/~mastjjb/jeb/orlib/capinfo.html)):
 
 ```julia
-data = loadCFLP("/path/to/your/CFLP/instance.txt")
+data = loadCFLP("/path/to/your/CFLP/instance.txt", optional_facilities_capacity)
 ```
 
 ## Installation
