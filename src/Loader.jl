@@ -8,6 +8,7 @@ function loadCFLP(instance::Symbol)
     name = splitext(basename(file_name))[1]
     file = ZipFile.Reader(file_name)
     values = parse.(Float64, split(read(file.files[1], String)))
+    close(file)
 
     return load(values, name)
 end
