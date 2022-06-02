@@ -6,7 +6,7 @@ struct CFLPFacility
 end
 
 function Base.show(io::IO, facility::CFLPFacility)
-    print(io, "F($(facility.id))")
+    @printf(io, "F(%d)", facility.id)
 end
 
 struct CFLPCustomer
@@ -16,7 +16,7 @@ struct CFLPCustomer
 end
 
 function Base.show(io::IO, customer::CFLPCustomer)
-    print(io, "C($(customer.id))")
+    @printf(io, "C(%d)", customer.id)
 end
 
 struct CFLPData
@@ -29,8 +29,8 @@ struct CFLPData
 end
 
 function Base.show(io::IO, data::CFLPData)
-    print(io, "CFLP Data $(data.name)")
-    print(io, " ($(length(data.facilities)) facilities,")
-    print(io, " $(length(data.customers)) customers)")
-    print(io, " [$(data.lb), $(data.ub)]")
+    @printf(io, "CFLP Data %s", data.name)
+    @printf(io, " (%d facilities,", length(data.facilities))
+    @printf(io, " %d customers)", length(data.customers))
+    @printf(io, " [%.3f, %.3f]", data.lb, data.ub)
 end

@@ -9,8 +9,8 @@ using Test
     @test data.customers[7].demand == 2370
     @test length(data.facilities) == 16
     @test length(data.customers) == 50
-    @test data.lb == -Inf
-    @test data.ub == Inf
+    @test data.lb == 1040444.375
+    @test data.ub == 1040444.375
     @test_nowarn println(data)
     @test_nowarn println(data.facilities[2])
     @test_nowarn println(data.customers[6])
@@ -29,8 +29,8 @@ end
     @test data.customers[7].demand == 2370
     @test length(data.facilities) == 16
     @test length(data.customers) == 50
-    @test data.lb == -Inf
-    @test data.ub == Inf
+    @test data.lb == 1040444.375
+    @test data.ub ==1040444.375
     @test_nowarn println(data)
     @test_nowarn println(data.facilities[2])
     @test_nowarn println(data.customers[6])
