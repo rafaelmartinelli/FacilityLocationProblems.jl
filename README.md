@@ -1,6 +1,7 @@
 # FacilityLocationProblems.jl
 
-[![Build Status](https://github.com/rafaelmartinelli/FacilityLocationProblems.jl/workflows/CI/badge.svg)](https://github.com/rafaelmartinelli/FacilityLocationProblems.jl/actions)
+[![Stable](https://img.shields.io/badge/docs-stable-blue.svg)](https://rafaelmartinelli.github.io/FacilityLocationProblems.jl/stable)
+[![Dev](https://img.shields.io/badge/docs-dev-blue.svg)](https://rafaelmartinelli.github.io/FacilityLocationProblems.jl/dev)[![Build Status](https://github.com/rafaelmartinelli/FacilityLocationProblems.jl/workflows/CI/badge.svg)](https://github.com/rafaelmartinelli/FacilityLocationProblems.jl/actions)
 [![Coverage](https://codecov.io/gh/rafaelmartinelli/FacilityLocationProblems.jl/branch/main/graph/badge.svg)](https://codecov.io/gh/rafaelmartinelli/FacilityLocationProblems.jl)
 [![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
 
