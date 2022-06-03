@@ -1,6 +1,7 @@
 module CFLPLib
 
-export CFLPData, CFLPFacility, CFLPCustomer, loadCFLP
+export loadFacilityLocationProblem, FacilityLocationProblem
+export nf, nc
 
 const data_path = joinpath(pkgdir(CFLPLib), "data")
 
