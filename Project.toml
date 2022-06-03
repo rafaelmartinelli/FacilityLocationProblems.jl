@@ -1,7 +1,7 @@
-name = "CFLPLib"
+name = "FacilityLocationProblems"
 uuid = "3771e204-432d-45a9-9661-5d0025a53671"
 authors = ["Rafael Martinelli"]
-version = "1.1.0"
+version = "1.2.0"
 
 [deps]
 Printf = "de0858da-6303-5e67-8744-51eddeeeb8d7"

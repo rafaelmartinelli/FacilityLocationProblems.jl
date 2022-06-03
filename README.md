@@ -1,7 +1,7 @@
 # FacilityLocationProblems.jl
 
-[![Build Status](https://github.com/rafaelmartinelli/CFLPLib.jl/workflows/CI/badge.svg)](https://github.com/rafaelmartinelli/CFLPLib.jl/actions)
-[![Coverage](https://codecov.io/gh/rafaelmartinelli/CFLPLib.jl/branch/main/graph/badge.svg)](https://codecov.io/gh/rafaelmartinelli/CFLPLib.jl)
+[![Build Status](https://github.com/rafaelmartinelli/FacilityLocationProblems.jl/workflows/CI/badge.svg)](https://github.com/rafaelmartinelli/FacilityLocationProblems.jl/actions)
+[![Coverage](https://codecov.io/gh/rafaelmartinelli/FacilityLocationProblems.jl/branch/main/graph/badge.svg)](https://codecov.io/gh/rafaelmartinelli/FacilityLocationProblems.jl)
 [![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
 
 This package reads data files in `cflp` format for Capacitated Facility Location Problem (CFLP) instances.
@@ -38,7 +38,7 @@ Optionally, it is possible to set the facilities' capacity (mandatory for instan
 data = loadFacilityLocationProblem(:capa, 8000)
 ```
 
-CFLPLib also loads custom CFLP instances (following [ORLib format](http://people.brunel.ac.uk/~mastjjb/jeb/orlib/capinfo.html)):
+This package also loads custom CFLP instances (following [ORLib format](http://people.brunel.ac.uk/~mastjjb/jeb/orlib/capinfo.html)):
 
 ```julia
 data = loadFacilityLocationProblem("/path/to/your/CFLP/instance.txt", optional_facilities_capacity)

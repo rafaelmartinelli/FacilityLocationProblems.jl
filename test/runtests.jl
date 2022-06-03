@@ -1,4 +1,4 @@
-using CFLPLib
+using FacilityLocationProblems
 using Test
 
 @testset "LoadSymbol" begin
@@ -20,7 +20,7 @@ end
 end
 
 @testset "LoadString" begin
-    data = loadFacilityLocationProblem(joinpath(pkgdir(CFLPLib), "test/data/cap41.txt"))
+    data = loadFacilityLocationProblem(joinpath(pkgdir(FacilityLocationProblems), "test/data/cap41.txt"))
     @test data.name == "cap41"
     @test data.capacities[3] == 5000
     @test data.fixed_costs[5] == 7500.0

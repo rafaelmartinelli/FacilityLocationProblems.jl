@@ -1,9 +1,9 @@
-module CFLPLib
+module FacilityLocationProblems
 
 export loadFacilityLocationProblem, FacilityLocationProblem
 export nf, nc
 
-const data_path = joinpath(pkgdir(CFLPLib), "data")
+const data_path = joinpath(pkgdir(FacilityLocationProblems), "data")
 
 using ZipFile
 using Printf
