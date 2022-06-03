@@ -59,3 +59,7 @@ end
     @test data.ub == 19240822.449
     @test_nowarn println(data)
 end
+
+@testset "NoCapacity" begin
+    @test_throws ErrorException data = loadFacilityLocationProblem(:capa)
+end

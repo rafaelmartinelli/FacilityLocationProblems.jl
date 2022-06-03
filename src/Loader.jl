@@ -33,7 +33,10 @@ function load(values::Array{SubString{String}}, name::String, capacity::Int64 = 
 
     capacities = Int64[]
     if capacity == 0
-        capacities = parse.(Int64, values[counter:2:counter + 2 * n_facilities - 1])
+        capacities = tryparse.(Int64, values[counter:2:counter + 2 * n_facilities - 1])
+        if capacities[1] === nothing
+            error("Instance $name does not have capacities. Please load with loadFacilityLocationProblem(instance, capacity).")
+        end
     else
         capacities = fill(capacity, n_facilities)
     end
