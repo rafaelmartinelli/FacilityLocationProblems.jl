@@ -56,9 +56,9 @@ jobs:
       - run: |
           julia --project=docs -e '
             using Documenter: DocMeta, doctest
-            using CFLPLib
-            DocMeta.setdocmeta!(CFLPLib, :DocTestSetup, :(using CFLPLib); recursive=true)
-            doctest(CFLPLib)'
+            using FacilityLocationProblems
+            DocMeta.setdocmeta!(FacilityLocationProblems, :DocTestSetup, :(using FacilityLocationProblems); recursive=true)
+            doctest(FacilityLocationProblems)'
       - run: julia --project=docs docs/make.jl
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

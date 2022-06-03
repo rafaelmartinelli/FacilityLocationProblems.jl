@@ -1,36 +1,21 @@
-struct CFLPFacility
-    id::Int64
-    capacity::Int64
-    fixed_cost::Float64
-    costs::Vector{Float64}
-end
-
-function Base.show(io::IO, facility::CFLPFacility)
-    @printf(io, "F(%d)", facility.id)
-end
-
-struct CFLPCustomer
-    id::Int64
-    demand::Int64
-    costs::Vector{Float64}
-end
-
-function Base.show(io::IO, customer::CFLPCustomer)
-    @printf(io, "C(%d)", customer.id)
-end
-
-struct CFLPData
+struct FacilityLocationProblem
     name::String
-    facilities::Vector{CFLPFacility}
-    customers::Vector{CFLPCustomer}
+
+    capacities::Vector{Int64}
+    demands::Vector{Int64}
+    fixed_costs::Vector{Float64}
+    costs::Matrix{Float64}
 
     lb::Float64
     ub::Float64
 end
 
-function Base.show(io::IO, data::CFLPData)
+nf(data::FacilityLocationProblem)::Int64 = length(data.capacities)
+nc(data::FacilityLocationProblem)::Int64 = length(data.demands)
+
+function Base.show(io::IO, data::FacilityLocationProblem)
     @printf(io, "CFLP Data %s", data.name)
-    @printf(io, " (%d facilities,", length(data.facilities))
-    @printf(io, " %d customers)", length(data.customers))
+    @printf(io, " (%d facilities,", nf(data))
+    @printf(io, " %d customers)", nc(data))
     @printf(io, " [%.3f, %.3f]", data.lb, data.ub)
 end

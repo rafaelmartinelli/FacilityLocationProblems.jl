@@ -1,7 +1,7 @@
-name = "CFLPLib"
+name = "FacilityLocationProblems"
 uuid = "3771e204-432d-45a9-9661-5d0025a53671"
 authors = ["Rafael Martinelli"]
-version = "1.1.0"
+version = "1.2.0"
 
 [deps]
 Printf = "de0858da-6303-5e67-8744-51eddeeeb8d7"
@@ -10,9 +10,3 @@ ZipFile = "a5390f91-8eb1-5f08-bee0-b1d1ffed6cea"
 [compat]
 ZipFile = "0.9"
 julia = "1"
-
-[extras]
-Test = "8dfed614-e22c-5e08-85e1-65c5234f0b40"
-
-[targets]
-test = ["Test"]

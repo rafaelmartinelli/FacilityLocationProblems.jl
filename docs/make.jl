@@ -1,16 +1,16 @@
-using CFLPLib
+using FacilityLocationProblems
 using Documenter
 
-DocMeta.setdocmeta!(CFLPLib, :DocTestSetup, :(using CFLPLib); recursive=true)
+DocMeta.setdocmeta!(FacilityLocationProblems, :DocTestSetup, :(using FacilityLocationProblems); recursive=true)
 
 makedocs(;
-    modules=[CFLPLib],
+    modules=[FacilityLocationProblems],
     authors="Rafael Martinelli",
-    repo="https://github.com/rafaelmartinelli/CFLPLib.jl/blob/{commit}{path}#{line}",
-    sitename="CFLPLib.jl",
+    repo="https://github.com/rafaelmartinelli/FacilityLocationProblems.jl/blob/{commit}{path}#{line}",
+    sitename="FacilityLocationProblems.jl",
     format=Documenter.HTML(;
         prettyurls=get(ENV, "CI", "false") == "true",
-        canonical="https://rafaelmartinelli.github.io/CFLPLib.jl",
+        canonical="https://rafaelmartinelli.github.io/FacilityLocationProblems.jl",
         assets=String[],
     ),
     pages=[
@@ -19,5 +19,5 @@ makedocs(;
 )
 
 deploydocs(;
-    repo="github.com/rafaelmartinelli/CFLPLib.jl",
+    repo="github.com/rafaelmartinelli/FacilityLocationProblems.jl",
 )

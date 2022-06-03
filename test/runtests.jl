@@ -1,69 +1,65 @@
-using CFLPLib
+using FacilityLocationProblems
 using Test
 
 @testset "LoadSymbol" begin
-    data = loadCFLP(:cap41)
+    data = loadFacilityLocationProblem(:cap41)
     @test data.name == "cap41"
-    @test data.facilities[3].capacity == 5000
-    @test data.facilities[5].fixed_cost == 7500.0
-    @test data.customers[7].demand == 2370
-    @test length(data.facilities) == 16
-    @test length(data.customers) == 50
+    @test data.capacities[3] == 5000
+    @test data.fixed_costs[5] == 7500.0
+    @test data.demands[7] == 2370
+    @test nf(data) == 16
+    @test nc(data) == 50
     @test data.lb == 1040444.375
     @test data.ub == 1040444.375
     @test_nowarn println(data)
-    @test_nowarn println(data.facilities[2])
-    @test_nowarn println(data.customers[6])
 end
 
 @testset "ErrorSymbol" begin
-    data = loadCFLP(:notaninstance)
+    data = loadFacilityLocationProblem(:notaninstance)
     @test data === nothing
 end
 
 @testset "LoadString" begin
-    data = loadCFLP(joinpath(pkgdir(CFLPLib), "test/data/cap41.txt"))
+    data = loadFacilityLocationProblem(joinpath(pkgdir(FacilityLocationProblems), "test/data/cap41.txt"))
     @test data.name == "cap41"
-    @test data.facilities[3].capacity == 5000
-    @test data.facilities[5].fixed_cost == 7500.0
-    @test data.customers[7].demand == 2370
-    @test length(data.facilities) == 16
-    @test length(data.customers) == 50
+    @test data.capacities[3] == 5000
+    @test data.fixed_costs[5] == 7500.0
+    @test data.demands[7] == 2370
+    @test nf(data) == 16
+    @test nc(data) == 50
     @test data.lb == 1040444.375
-    @test data.ub ==1040444.375
+    @test data.ub == 1040444.375
     @test_nowarn println(data)
-    @test_nowarn println(data.facilities[2])
-    @test_nowarn println(data.customers[6])
 end
 
 @testset "ErrorString" begin
-    data = loadCFLP("notaninstance")
+    data = loadFacilityLocationProblem("notaninstance")
     @test data === nothing
 end
 
 @testset "DifferentCapacity" begin
-    data = loadCFLP(:cap41, 1000)
+    data = loadFacilityLocationProblem(:cap41, 1000)
     @test data.name == "cap41-1000"
-    @test data.facilities[3].capacity == 1000
-    @test data.facilities[5].capacity == 1000
+    @test data.capacities[3] == 1000
+    @test data.capacities[5] == 1000
     @test data.lb == -Inf
     @test data.ub == Inf
     @test_nowarn println(data)
-    @test_nowarn println(data.facilities[2])
-    @test_nowarn println(data.customers[6])
 end
 
 @testset "LargeInstances" begin
-    data = loadCFLP(:capa, 8000)
+    data = loadFacilityLocationProblem(:capa, 8000)
     @test data.name == "capa-8000"
-    @test data.facilities[3].capacity == 8000
-    @test data.facilities[5].fixed_cost == 2164343.000
-    @test data.customers[7].demand == 14
-    @test length(data.facilities) == 100
-    @test length(data.customers) == 1000
+    @test data.capacities[3] == 8000
+    @test data.fixed_costs[5] == 2164343.000
+    @test data.demands[7] == 14
+    @test nf(data) == 100
+    @test nc(data) == 1000
     @test data.lb == 19240822.449
     @test data.ub == 19240822.449
     @test_nowarn println(data)
-    @test_nowarn println(data.facilities[2])
-    @test_nowarn println(data.customers[6])
+end
+
+@testset "NoCapacity" begin
+    @test_throws ErrorException data = loadFacilityLocationProblem(:capa)
 end
