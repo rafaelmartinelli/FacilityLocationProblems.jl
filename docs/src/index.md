@@ -46,12 +46,12 @@ data = loadFacilityLocationProblem("/path/to/your/CFLP/instance.txt", optional_f
 
 ## Installation
 
-FacilityLocationProblems is *not* yet a registered Julia Package.
+FacilityLocationProblems is a registered Julia Package (yay!).
 You can install FacilityLocationProblems through the Julia package manager.
 Open Julia's interactive session (REPL) and type:
 
 ```julia
-] add https://github.com/rafaelmartinelli/FacilityLocationProblems.jl
+] add FacilityLocationProblems
 ```
 
 ```@index

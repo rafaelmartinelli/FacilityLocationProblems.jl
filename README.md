@@ -1,7 +1,8 @@
 # FacilityLocationProblems.jl
 
 [![Stable](https://img.shields.io/badge/docs-stable-blue.svg)](https://rafaelmartinelli.github.io/FacilityLocationProblems.jl/stable)
-[![Dev](https://img.shields.io/badge/docs-dev-blue.svg)](https://rafaelmartinelli.github.io/FacilityLocationProblems.jl/dev)[![Build Status](https://github.com/rafaelmartinelli/FacilityLocationProblems.jl/workflows/CI/badge.svg)](https://github.com/rafaelmartinelli/FacilityLocationProblems.jl/actions)
+[![Dev](https://img.shields.io/badge/docs-dev-blue.svg)](https://rafaelmartinelli.github.io/FacilityLocationProblems.jl/dev)
+[![Build Status](https://github.com/rafaelmartinelli/FacilityLocationProblems.jl/workflows/CI/badge.svg)](https://github.com/rafaelmartinelli/FacilityLocationProblems.jl/actions)
 [![Coverage](https://codecov.io/gh/rafaelmartinelli/FacilityLocationProblems.jl/branch/main/graph/badge.svg)](https://codecov.io/gh/rafaelmartinelli/FacilityLocationProblems.jl)
 [![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
 
@@ -47,12 +48,12 @@ data = loadFacilityLocationProblem("/path/to/your/CFLP/instance.txt", optional_f
 
 ## Installation
 
-FacilityLocationProblems is *not* yet a registered Julia Package.
+FacilityLocationProblems is a registered Julia Package (yay!).
 You can install FacilityLocationProblems through the Julia package manager.
 Open Julia's interactive session (REPL) and type:
 
 ```julia
-] add https://github.com/rafaelmartinelli/FacilityLocationProblems.jl
+] add FacilityLocationProblems
 ```
 
 ## Related links
@@ -62,7 +63,7 @@ Open Julia's interactive session (REPL) and type:
 
 ## Other packages
 
-- [KnapsackLib.jl](https://github.com/rafaelmartinelli/KnapsackLib.jl): Knapsack algorithms in Julia
+- [KnapsackLib.jl](https://github.com/rafaelmartinelli/Knapsacks.jl): Knapsack algorithms in Julia
 - [GAPLib.jl](https://github.com/rafaelmartinelli/GAPLib.jl): Generalized Assignment Problem Lib
 - [BPPLib.jl](https://github.com/rafaelmartinelli/BPPLib.jl): Bin Packing and Cutting Stock Lib
 - [CARPData.jl](https://github.com/rafaelmartinelli/CARPData.jl): Capacitated Arc Routing Problem Lib
