@@ -6,11 +6,17 @@
 [![Coverage](https://codecov.io/gh/rafaelmartinelli/FacilityLocationProblems.jl/branch/main/graph/badge.svg)](https://codecov.io/gh/rafaelmartinelli/FacilityLocationProblems.jl)
 [![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
 
-This package reads data files in `cflp` format for Capacitated Facility Location Problem (CFLP) instances.
+This package reads data files for different location problems instances:
+
+- Capacitated Facility Location Problems
+- (Capacitated) P-Median Problems
+- Maximum Coverage Problems
 
 ## Usage
 
-The type used by the package is `FacilityLocationProblem`, defined as follows:
+### Capacitated Facility Location Problems
+
+The type used by Capacitated Facility Location Problems is `FacilityLocationProblem`, defined as follows:
 
 ```julia
 struct FacilityLocationProblem
@@ -26,13 +32,11 @@ struct FacilityLocationProblem
 end
 ```
 
-Some classical CFLP instances from the literature are preloaded. For example, to load CFLP instance `cap41`:
+Some classical CFLP instances from the literature are preloaded. For example, to load instance `cap41`:
 
 ```julia
 data = loadFacilityLocationProblem(:cap41)
 ```
-
-See the [full list](https://github.com/rafaelmartinelli/FacilityLocationProblems.jl/tree/main/data).
 
 Optionally, it is possible to set the facilities' capacity (mandatory for instances `capa`, `capb`, and `capc`):
 
@@ -40,10 +44,66 @@ Optionally, it is possible to set the facilities' capacity (mandatory for instan
 data = loadFacilityLocationProblem(:capa, 8000)
 ```
 
-This package also loads custom CFLP instances (following [ORLib format](http://people.brunel.ac.uk/~mastjjb/jeb/orlib/capinfo.html)):
+### (Capacitated) P-Median Problems
+
+The type used by (Capacitated) P-Median Problems is `FacilityLocationProblem`, defined as follows:
 
 ```julia
-data = loadFacilityLocationProblem("/path/to/your/CFLP/instance.txt", optional_facilities_capacity)
+struct PMedianProblem
+    name::String           # Instance name
+
+    medians::Int64         # Number of medians (p)
+    capacity::Int64        # Medians capacities
+
+    demands::Vector{Int64} # Customers demands
+    costs::Matrix{Float64} # Costs matrix (distances)
+
+    lb::Float64            # Lower bound (-Inf if not known)
+    ub::Float64            # Upper bound ( Inf if not known)
+end
+```
+
+Some classical (Capacitated) P-Median instances from the literature are preloaded. For example, to load instance `pmedcap01`:
+
+```julia
+data = loadPMedianProblem(:pmedcap01)
+```
+
+### Maximum Coverage Problems
+
+The type used by Maximum Coverage Problems is `MaximumCoverageProblem`, defined as follows:
+
+```julia
+struct MaximumCoverageProblem
+    name::String                    # Instance name
+
+    medians::Int64                  # Number of medians (p)
+    distance::Int64                 # Coverage distance
+
+    demands::Vector{Int64}          # Customers demands
+    coverage::Vector{Vector{Int64}} # Coverage sets
+
+    lb::Float64                     # Lower bound (-Inf if not known)
+    ub::Float64                     # Upper bound ( Inf if not known)
+end
+```
+
+The package loads Capacitated P-Median instances as Maximum Coverage Problems, and the user must input the maximum coverage distance. For example, to load instance `pmedcap01` with maximum coverage distance of 10:
+
+```julia
+data = loadMaximumCoverageProblem(:pmedcap01, 10)
+```
+
+The medians capacities are ignored, and the coverage sets are built using calculated costs and given coverage distance.
+
+### Other Features
+
+See the [full list](https://github.com/rafaelmartinelli/FacilityLocationProblems.jl/tree/main/data) of preloaded instances.
+
+This package also loads custom instances (following [ORLib format](http://people.brunel.ac.uk/~mastjjb/jeb/info.html)):
+
+```julia
+data = loadTypeOfProblem("/path/to/your/instance.txt", optional_arguments)
 ```
 
 ## Installation
@@ -58,12 +118,19 @@ Open Julia's interactive session (REPL) and type:
 
 ## Related links
 
-- [ORLib's CFLP page](http://people.brunel.ac.uk/~mastjjb/jeb/orlib/capinfo.html)
+- [ORLib's Capacitated Facility Location page](http://people.brunel.ac.uk/~mastjjb/jeb/orlib/capinfo.html)
+- [ORLib's Uncapacitated P-Median page](http://people.brunel.ac.uk/~mastjjb/jeb/orlib/pmedinfo.html)
+- [ORLib's Capacitated P-Median page](http://people.brunel.ac.uk/~mastjjb/jeb/orlib/pmedcapinfo.html)
 - [Sobolev Institute of Mathematics' CFLP Page](http://www.math.nsc.ru/AP/benchmarks/CFLP/cflp_tabl-eng.html) (this package does not read those instances)
+- [Instituto Nacional de Pesquisas Espaciais' P-Median and Max Cover Page](http://www.lac.inpe.br/~lorena/instancias.html) (this package does not read those instances)
 
 ## Other packages
 
 - [KnapsackLib.jl](https://github.com/rafaelmartinelli/Knapsacks.jl): Knapsack algorithms in Julia
-- [GAPLib.jl](https://github.com/rafaelmartinelli/GAPLib.jl): Generalized Assignment Problem Lib
+- [AssignmentProblems.jl](https://github.com/rafaelmartinelli/AssignmentProblems.jl): Assignment Problems Lib
+- [InventoryRoutingProblems.jl](https://github.com/rafaelmartinelli/InventoryRoutingProblems.jl): Assignment Problems Lib
 - [BPPLib.jl](https://github.com/rafaelmartinelli/BPPLib.jl): Bin Packing and Cutting Stock Lib
 - [CARPData.jl](https://github.com/rafaelmartinelli/CARPData.jl): Capacitated Arc Routing Problem Lib
+- [MDVSP.jl](https://github.com/rafaelmartinelli/MDVSP.jl): Multiple-Depot Vehicle Scheduling Problem Lib
+- [CVRPLIB.jl](https://github.com/chkwon/CVRPLIB.jl): Capacitated Vehicle Routing Problem Lib
+- [TSPLIB.jl](https://github.com/matago/TSPLIB.jl): Traveling Salesman Problem Lib

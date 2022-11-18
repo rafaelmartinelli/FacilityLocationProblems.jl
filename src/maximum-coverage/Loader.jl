@@ -38,5 +38,5 @@ function loadMaximumCoverageProblem(values::Array{SubString{String}}, distance::
     costs = [ floor(Int64, euclidean([x[i], y[i]], [x[j], y[j]])) for i in 1:n, j in 1:n ]
     coverage = [ [ j for j in 1:n if costs[i, j] <= distance ] for i in 1:n ]
 
-    return MaximumCoverageProblem(name, medians, distance, demands, coverage, 0, Inf64)
+    return MaximumCoverageProblem(name, medians, distance, demands, coverage, -Inf64, Inf64)
 end
