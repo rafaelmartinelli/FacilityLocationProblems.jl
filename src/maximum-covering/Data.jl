@@ -1,4 +1,4 @@
-struct MaximumCoverageProblem
+struct MaximumCoveringProblem
     name::String
 
     medians::Int64
@@ -11,9 +11,9 @@ struct MaximumCoverageProblem
     ub::Float64
 end
 
-nc(data::MaximumCoverageProblem)::Int64 = length(data.demands)
+nc(data::MaximumCoveringProblem)::Int64 = length(data.demands)
 
-function Base.show(io::IO, data::MaximumCoverageProblem)
+function Base.show(io::IO, data::MaximumCoveringProblem)
     @printf(io, "Max Cover Data %s", data.name)
     @printf(io, " (p = %d,", data.medians)
     @printf(io, " dist = %d,", data.distance)

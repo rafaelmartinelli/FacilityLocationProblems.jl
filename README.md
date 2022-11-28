@@ -8,7 +8,7 @@
 
 This package reads data files for different location problems instances:
 
-- Capacitated Facility Location Problems
+- (Capacitated) Facility Location Problems
 - (Capacitated) P-Median Problems
 - Maximum Coverage Problems
 
@@ -16,7 +16,7 @@ This package reads data files for different location problems instances:
 
 ### Capacitated Facility Location Problems
 
-The type used by Capacitated Facility Location Problems is `FacilityLocationProblem`, defined as follows:
+The type used by (Capacitated) Facility Location Problems is `FacilityLocationProblem`, defined as follows:
 
 ```julia
 struct FacilityLocationProblem
@@ -32,16 +32,24 @@ struct FacilityLocationProblem
 end
 ```
 
-Some classical CFLP instances from the literature are preloaded. For example, to load instance `cap41`:
+Some classical instances from the literature can be downloaded on demand from [ORLib page](http://people.brunel.ac.uk/~mastjjb/jeb/info.html). For example, to download and load instance `cap41`:
 
 ```julia
 data = loadFacilityLocationProblem(:cap41)
 ```
 
+See the full list on [ORLib UFLP page](http://people.brunel.ac.uk/~mastjjb/jeb/orlib/uncapinfo.html), [ORLib CFLP page](http://people.brunel.ac.uk/~mastjjb/jeb/orlib/capinfo.html) or calling the function `getFacilityLocationInstances`.
+
 Optionally, it is possible to set the facilities' capacity (mandatory for instances `capa`, `capb`, and `capc`):
 
 ```julia
 data = loadFacilityLocationProblem(:capa, 8000)
+```
+
+It is also possible to load local instance files:
+
+```julia
+data = loadFacilityLocationProblem("/path/to/your/instance", optional_capacity)
 ```
 
 ### (Capacitated) P-Median Problems

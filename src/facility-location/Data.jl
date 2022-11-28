@@ -15,7 +15,7 @@ nc(data::FacilityLocationProblem)::Int64 = length(data.demands)
 
 function Base.show(io::IO, data::FacilityLocationProblem)
     @printf(io, "CFLP Data %s", data.name)
-    @printf(io, " (%d facilities,", nf(data))
-    @printf(io, " %d customers)", nc(data))
+    @printf(io, " (nf = %d,", nf(data))
+    @printf(io, " nc = %d)", nc(data))
     @printf(io, " [%.3f, %.3f]", data.lb, data.ub)
 end

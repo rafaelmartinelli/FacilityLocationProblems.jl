@@ -39,7 +39,7 @@ end
 
 @testset "DifferentCapacity" begin
     data = loadFacilityLocationProblem(:cap41, 1000)
-    @test data.name == "cap41-1000"
+    @test data.name == "cap41_1000"
     @test data.capacities[3] == 1000
     @test data.capacities[5] == 1000
     @test data.lb == -Inf
@@ -49,7 +49,7 @@ end
 
 @testset "LargeInstances" begin
     data = loadFacilityLocationProblem(:capa, 8000)
-    @test data.name == "capa-8000"
+    @test data.name == "capa_8000"
     @test data.capacities[3] == 8000
     @test data.fixed_costs[5] == 2164343.000
     @test data.demands[7] == 14
@@ -61,5 +61,6 @@ end
 end
 
 @testset "NoCapacity" begin
-    @test_throws ErrorException data = loadFacilityLocationProblem(:capa)
+    data = loadFacilityLocationProblem(:capa)
+    @test data === nothing
 end
