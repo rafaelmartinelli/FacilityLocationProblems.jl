@@ -1,18 +1,9 @@
 function loadFacilityLocationProblem(instance::Symbol, capacity::Int64 = 0)::Union{FacilityLocationProblem, Nothing}
     name = string(instance)
-
-    regex = r"cap(a|b|c)_(\d+)"
-    regex_values = match(regex, name)
-
-    if regex_values !== nothing && length(regex_values) == 2
-        name = "cap" * regex_values[1]
-        if capacity == 0
-            capacity = parse(Int64, regex_values[2])
-        end
-    end
-
     file_name = name * ".txt"
-    if !isfile(file_name)
+    abs_file_name = joinpath(data_path, file_name)
+
+    if !isfile(abs_file_name)
         if !downloadFile(orlib_url * file_name, file_name)
             return nothing
         end
@@ -21,7 +12,6 @@ function loadFacilityLocationProblem(instance::Symbol, capacity::Int64 = 0)::Uni
     if capacity != 0
         name *= "_" * string(capacity)
     end
-    abs_file_name = joinpath(data_path, file_name)
     values = split(read(abs_file_name, String))
 
     return doLoadFacilityLocationProblem(values, name, capacity)

@@ -36,18 +36,9 @@
     cap132
     cap133
     cap134
-    capa_8000
-    capa_10000
-    capa_12000
-    capa_14000
-    capb_5000
-    capb_6000
-    capb_7000
-    capb_8000
-    capc_5000
-    capc_5750
-    capc_6500
-    capc_7250
+    capa
+    capb
+    capc
 end
 
 for inst in instances(FacilityLocationInstances)
