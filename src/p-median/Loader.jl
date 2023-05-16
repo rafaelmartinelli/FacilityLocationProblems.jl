@@ -39,5 +39,5 @@ function loadPMedianProblem(values::Array{SubString{String}}, name::String)::Uni
 
     costs = [ floor(Int64, euclidean([x[i], y[i]], [x[j], y[j]])) for i in 1:n, j in 1:n ]
 
-    return PMedianProblem(name, medians, capacity, demands, costs, -Inf64, ub)
+    return PMedianProblem(name, medians, capacity, demands, costs, x, y, -Inf64, ub)
 end

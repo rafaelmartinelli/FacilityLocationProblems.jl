@@ -7,6 +7,9 @@ struct PMedianProblem
     demands::Vector{Int64}
     costs::Matrix{Float64}
 
+    x::Vector{Int64}
+    y::Vector{Int64}
+
     lb::Float64
     ub::Float64
 end
