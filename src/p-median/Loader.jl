@@ -10,7 +10,7 @@ function loadPMedianProblem(instance::Symbol)::Union{PMedianProblem, Nothing}
     values = split(read(file.files[1], String))
     close(file)
 
-    return loadPMedianProblem(values, name)
+    return doLoadPMedianProblem(values, name)
 end
 
 function loadPMedianProblem(file_name::String)::Union{PMedianProblem, Nothing}
@@ -22,10 +22,10 @@ function loadPMedianProblem(file_name::String)::Union{PMedianProblem, Nothing}
     name = splitext(basename(file_name))[1]
     values = split(read(file_name, String))
 
-    return loadPMedianProblem(values, name)
+    return doLoadPMedianProblem(values, name)
 end
 
-function loadPMedianProblem(values::Array{SubString{String}}, name::String)::Union{PMedianProblem, Nothing}
+function doLoadPMedianProblem(values::Vector{SubString{String}}, name::String)::Union{PMedianProblem, Nothing}
     ub = parse(Int64, values[2])
     n = parse(Int64, values[3])
     medians = parse(Int64, values[4])

@@ -5,7 +5,7 @@ struct PMedianProblem
     capacity::Int64
 
     demands::Vector{Int64}
-    costs::Matrix{Float64}
+    costs::Matrix{Int64}
 
     x::Vector{Int64}
     y::Vector{Int64}

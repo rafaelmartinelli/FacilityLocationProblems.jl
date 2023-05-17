@@ -1,4 +1,4 @@
-@testset "LoadSymbol" begin
+@testset "FLLoadSymbol" begin
     data = loadFacilityLocationProblem(:cap41)
     @test data.name == "cap41"
     @test data.capacities[3] == 5000
@@ -11,12 +11,12 @@
     @test_nowarn println(data)
 end
 
-@testset "ErrorSymbol" begin
+@testset "FLErrorSymbol" begin
     data = loadFacilityLocationProblem(:notaninstance)
     @test data === nothing
 end
 
-@testset "LoadString" begin
+@testset "FLLoadString" begin
     data = loadFacilityLocationProblem(joinpath(pkgdir(FacilityLocationProblems), "test/data/cap41.txt"))
     @test data.name == "cap41"
     @test data.capacities[3] == 5000
@@ -29,12 +29,12 @@ end
     @test_nowarn println(data)
 end
 
-@testset "ErrorString" begin
+@testset "FLErrorString" begin
     data = loadFacilityLocationProblem("notaninstance")
     @test data === nothing
 end
 
-@testset "DifferentCapacity" begin
+@testset "FLDifferentCapacity" begin
     data = loadFacilityLocationProblem(:cap41, 1000)
     @test data.name == "cap41_1000"
     @test data.capacities[3] == 1000
@@ -44,7 +44,7 @@ end
     @test_nowarn println(data)
 end
 
-@testset "LargeInstances" begin
+@testset "FLLargeInstances" begin
     data = loadFacilityLocationProblem(:capa, 8000)
     @test data.name == "capa_8000"
     @test data.capacities[3] == 8000
@@ -57,12 +57,12 @@ end
     @test_nowarn println(data)
 end
 
-@testset "NoCapacity" begin
+@testset "FLNoCapacity" begin
     data = loadFacilityLocationProblem(:capa)
     @test data === nothing
 end
 
-@testset "InstanceList" begin
+@testset "FLInstanceList" begin
     list = getFacilityLocationInstances()
     @test list[10] == :cap71
     @test length(list) == 40

@@ -1,19 +1,8 @@
 function loadFacilityLocationProblem(instance::Symbol, capacity::Int64 = 0)::Union{FacilityLocationProblem, Nothing}
     name = string(instance)
-    file_name = name * ".txt"
-    abs_file_name = joinpath(data_path, file_name)
-
-    if !isfile(abs_file_name)
-        if !downloadFile(orlib_url * file_name, file_name)
-            return nothing
-        end
-    end
-
-    if capacity != 0
-        name *= "_" * string(capacity)
-    end
-    values = split(read(abs_file_name, String))
-
+    values = readInstance(name)
+    if values === nothing return nothing end
+    name = name * (capacity == 0 ? "" : "_$capacity")
     return doLoadFacilityLocationProblem(values, name, capacity)
 end
 
@@ -23,13 +12,12 @@ function loadFacilityLocationProblem(file_name::String, capacity::Int64 = 0)::Un
         return nothing
     end
     
-    name = splitext(basename(file_name))[1] * (capacity == 0 ? "" : "_$capacity")
     values = split(read(file_name, String))
-
+    name = splitext(basename(file_name))[1] * (capacity == 0 ? "" : "_$capacity")
     return doLoadFacilityLocationProblem(values, name, capacity)
 end
 
-function doLoadFacilityLocationProblem(values::Array{SubString{String}}, name::String, capacity::Int64)::Union{FacilityLocationProblem, Nothing}
+function doLoadFacilityLocationProblem(values::Vector{SubString{String}}, name::String, capacity::Int64)::Union{FacilityLocationProblem, Nothing}
     n_facilities = parse(Int64, values[1])
     n_customers = parse(Int64, values[2])
 

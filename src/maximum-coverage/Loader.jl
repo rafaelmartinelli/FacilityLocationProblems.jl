@@ -10,7 +10,7 @@ function loadMaximumCoverageProblem(instance::Symbol, distance::Int64)::Union{Ma
     values = split(read(file.files[1], String))
     close(file)
 
-    return loadMaximumCoverageProblem(values, distance, name)
+    return doLoadMaximumCoverageProblem(values, distance, name)
 end
 
 function loadMaximumCoverageProblem(file_name::String, distance::Int64)::Union{MaximumCoverageProblem, Nothing}
@@ -22,10 +22,10 @@ function loadMaximumCoverageProblem(file_name::String, distance::Int64)::Union{M
     name = splitext(basename(file_name))[1]
     values = split(read(file_name, String))
 
-    return loadMaximumCoverageProblem(values, distance, name)
+    return doLoadMaximumCoverageProblem(values, distance, name)
 end
 
-function loadMaximumCoverageProblem(values::Array{SubString{String}}, distance::Int64, name::String)::Union{MaximumCoverageProblem, Nothing}
+function doLoadMaximumCoverageProblem(values::Array{SubString{String}}, distance::Int64, name::String)::Union{MaximumCoverageProblem, Nothing}
     n = parse(Int64, values[3])
     medians = parse(Int64, values[4])
 
@@ -38,5 +38,5 @@ function loadMaximumCoverageProblem(values::Array{SubString{String}}, distance::
     costs = [ floor(Int64, euclidean([x[i], y[i]], [x[j], y[j]])) for i in 1:n, j in 1:n ]
     coverage = [ [ j for j in 1:n if costs[i, j] <= distance ] for i in 1:n ]
 
-    return MaximumCoverageProblem(name, medians, distance, demands, coverage, -Inf64, Inf64)
+    return MaximumCoverageProblem(name, medians, distance, demands, coverage, x, y, -Inf64, Inf64)
 end
