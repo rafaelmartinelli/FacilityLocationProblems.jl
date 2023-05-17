@@ -1,16 +1,9 @@
 function loadFacilityLocationProblem(instance::Symbol, capacity::Int64 = 0)::Union{FacilityLocationProblem, Nothing}
-    file_name = joinpath(data_path, string(instance) * ".zip")
-    if !isfile(file_name)
-        println("File $(string(instance)) not found!")
-        return nothing
-    end
-
-    name = splitext(basename(file_name))[1] * (capacity == 0 ? "" : "-$capacity")
-    file = ZipFile.Reader(file_name)
-    values = split(read(file.files[1], String))
-    close(file)
-
-    return loadFacilityLocationProblem(values, name, capacity)
+    name = string(instance)
+    values = readInstance(name)
+    if values === nothing return nothing end
+    name = name * (capacity == 0 ? "" : "_$capacity")
+    return doLoadFacilityLocationProblem(values, name, capacity)
 end
 
 function loadFacilityLocationProblem(file_name::String, capacity::Int64 = 0)::Union{FacilityLocationProblem, Nothing}
@@ -19,13 +12,12 @@ function loadFacilityLocationProblem(file_name::String, capacity::Int64 = 0)::Un
         return nothing
     end
     
-    name = splitext(basename(file_name))[1] * (capacity == 0 ? "" : "-$capacity")
     values = split(read(file_name, String))
-
-    return loadFacilityLocationProblem(values, name, capacity)
+    name = splitext(basename(file_name))[1] * (capacity == 0 ? "" : "_$capacity")
+    return doLoadFacilityLocationProblem(values, name, capacity)
 end
 
-function loadFacilityLocationProblem(values::Array{SubString{String}}, name::String, capacity::Int64 = 0)::Union{FacilityLocationProblem, Nothing}
+function doLoadFacilityLocationProblem(values::Vector{SubString{String}}, name::String, capacity::Int64)::Union{FacilityLocationProblem, Nothing}
     n_facilities = parse(Int64, values[1])
     n_customers = parse(Int64, values[2])
 
@@ -35,7 +27,8 @@ function loadFacilityLocationProblem(values::Array{SubString{String}}, name::Str
     if capacity == 0
         capacities = tryparse.(Int64, values[counter:2:counter + 2 * n_facilities - 1])
         if capacities[1] === nothing
-            error("Instance $name does not have capacities. Please load with loadFacilityLocationProblem(instance, capacity).")
+            @error("Instance $name does not have capacities. Please load with loadFacilityLocationProblem(instance, capacity).")
+            return nothing
         end
     else
         capacities = fill(capacity, n_facilities)
@@ -52,5 +45,5 @@ function loadFacilityLocationProblem(values::Array{SubString{String}}, name::Str
         counter += n_facilities + 1
     end
 
-    return FacilityLocationProblem(name, capacities, demands, fixed_costs, costs, loadBounds(name)...)
+    return FacilityLocationProblem(name, capacities, demands, fixed_costs, costs, loadBounds(name, capacity)...)
 end

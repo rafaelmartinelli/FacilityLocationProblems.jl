@@ -7,6 +7,9 @@ struct MaximumCoverageProblem
     demands::Vector{Int64}
     coverage::Vector{Vector{Int64}}
 
+    x::Vector{Int64}
+    y::Vector{Int64}
+
     lb::Float64
     ub::Float64
 end
