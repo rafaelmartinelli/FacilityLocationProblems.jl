@@ -4,6 +4,7 @@ authors = ["Rafael Martinelli"]
 version = "1.2.0"
 
 [deps]
+Distances = "b4f34e82-e78d-54a5-968a-f98e89d6e8f7"
 Printf = "de0858da-6303-5e67-8744-51eddeeeb8d7"
 ZipFile = "a5390f91-8eb1-5f08-bee0-b1d1ffed6cea"
 

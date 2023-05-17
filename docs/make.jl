@@ -19,5 +19,8 @@ makedocs(;
 )
 
 deploydocs(;
-    repo="github.com/rafaelmartinelli/FacilityLocationProblems.jl",
+    repo="github.com/rafaelmartinelli/FacilityLocationProblems.jl.git",
+    target="build",
+    branch="gh-pages",
+    versions=["stable"=>"v^","v#.#"],
 )

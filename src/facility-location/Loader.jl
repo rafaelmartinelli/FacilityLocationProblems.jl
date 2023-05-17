@@ -10,7 +10,7 @@ function loadFacilityLocationProblem(instance::Symbol, capacity::Int64 = 0)::Uni
     values = split(read(file.files[1], String))
     close(file)
 
-    return load(values, name, capacity)
+    return loadFacilityLocationProblem(values, name, capacity)
 end
 
 function loadFacilityLocationProblem(file_name::String, capacity::Int64 = 0)::Union{FacilityLocationProblem, Nothing}
@@ -22,10 +22,10 @@ function loadFacilityLocationProblem(file_name::String, capacity::Int64 = 0)::Un
     name = splitext(basename(file_name))[1] * (capacity == 0 ? "" : "-$capacity")
     values = split(read(file_name, String))
 
-    return load(values, name, capacity)
+    return loadFacilityLocationProblem(values, name, capacity)
 end
 
-function load(values::Array{SubString{String}}, name::String, capacity::Int64 = 0)::Union{FacilityLocationProblem, Nothing}
+function loadFacilityLocationProblem(values::Array{SubString{String}}, name::String, capacity::Int64 = 0)::Union{FacilityLocationProblem, Nothing}
     n_facilities = parse(Int64, values[1])
     n_customers = parse(Int64, values[2])
 
